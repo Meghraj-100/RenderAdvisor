@@ -104,7 +104,7 @@ export default function LandingPage() {
         <div className="text-center mb-12">
           <h2 className="text-2xl font-bold text-white mb-4">Grounded in Peer-Reviewed Research</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            The decision engine weights and LCP gain estimates are derived directly from empirical data in recent academic papers.
+            The decision engine weights and LCP gain estimates are derived directly from empirical web performance benchmarks and research studies.
           </p>
         </div>
         

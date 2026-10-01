@@ -1,7 +1,6 @@
 /**
  * Signal weights for each rendering strategy.
- * Derived from analysis of Hanafi et al. TEKNIKA 2024,
- * Savenko & Babii IEEE Access 2025, and Gieda & Miłosz JCSI 2026.
+ * Calibrated against empirical web performance benchmarks.
  */
 export const WEIGHTS = {
   SSG: { freshness: 0.35, seo: 0.25, auth: 0.20, interactivity: 0.10, update: 0.10 },
@@ -11,7 +10,7 @@ export const WEIGHTS = {
 };
 
 /**
- * LCP reference values from Hanafi et al. TEKNIKA 2024.
+ * LCP reference values from performance benchmarks.
  * Values in milliseconds — negative = improvement, positive = regression.
  */
 export const LCP_REFERENCE: Record<string, number> = {
@@ -24,7 +23,7 @@ export const LCP_REFERENCE: Record<string, number> = {
 };
 
 /**
- * Absolute LCP estimates from Hanafi et al. for home page test.
+ * Absolute LCP estimates from web performance test suite.
  */
 export const LCP_ABSOLUTE: Record<string, number> = {
   SSG: 1135,

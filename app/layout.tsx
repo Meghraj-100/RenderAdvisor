@@ -30,7 +30,7 @@ export default function RootLayout({
         <footer className="relative z-10 py-6 border-t border-white/10 bg-navy-950/80 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-sm text-gray-500 font-medium">
-              Built for BTP — Based on Hanafi et al. TEKNIKA 2024 · Savenko & Babii IEEE Access 2025 · Gieda & Miłosz JCSI 2026
+              RenderAdvisor &copy; {new Date().getFullYear()} — Next.js Rendering Strategy Decision Engine
             </p>
           </div>
         </footer>

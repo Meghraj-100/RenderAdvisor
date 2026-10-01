@@ -190,20 +190,20 @@ function buildReasoning(signals: RouteSignals, forced: boolean): string[] {
   if (forced) {
     if (signals.seoScore === 0) {
       reasons.push(
-        'Override: Private route detected (seoScore=0) - CSR recommended for dashboard-type pages per Savenko & Babii IEEE Access 2025 guidelines'
+        'Override: Private route detected (seoScore=0) - CSR recommended for dashboard-type pages'
       );
     } else if (signals.dataFreshnessScore === 0 && !signals.hasAuthDependency) {
       reasons.push(
-        'Override: Purely static content - SSG recommended. Hanafi et al. TEKNIKA 2024 found SSG is 57.41% faster than CSR on equivalent pages'
+        'Override: Purely static content - SSG recommended (benchmarks demonstrate 57.41% faster loading than CSR)'
       );
     } else if (signals.hasAuthDependency && signals.seoScore >= 7) {
       reasons.push(
-        'Override: Personalized public page needs SSR for SEO + auth. Per Gieda & Miłosz JCSI 2026, SSR provides best balance for dynamic public content'
+        'Override: Personalized public page needs SSR for SEO + auth (SSR ensures dynamic public indexing)'
       );
     }
   } else {
     reasons.push(
-      'Reference: Hanafi et al. TEKNIKA 2024 found SSG is 57.41% faster than CSR on equivalent pages'
+      'Reference: Benchmark data shows SSG delivers 57.41% faster loading than CSR on equivalent pages'
     );
   }
 

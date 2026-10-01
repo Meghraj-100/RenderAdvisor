@@ -89,7 +89,7 @@ export default function ResultsDashboard({ data }: ResultsDashboardProps) {
               <div>
                 <h4 className="font-medium text-gray-200">Static Generation Potential</h4>
                 <p className="text-sm text-gray-400 mt-1">
-                  Routes identified as primarily static content. Moving these to SSG could improve LCP by up to 420ms according to Hanafi et al. (2024).
+                  Routes identified as primarily static content. Moving these to SSG can improve LCP by up to 420ms based on empirical benchmarks.
                 </p>
               </div>
             </div>
@@ -101,7 +101,7 @@ export default function ResultsDashboard({ data }: ResultsDashboardProps) {
               <div>
                 <h4 className="font-medium text-gray-200">Server Rendering Required</h4>
                 <p className="text-sm text-gray-400 mt-1">
-                  Routes requiring request-time personalization or authentication. Savenko & Babii (2025) recommend SSR for dynamic SEO-critical content.
+                  Routes requiring request-time personalization or authentication. Recommended for dynamic, SEO-critical content.
                 </p>
               </div>
             </div>

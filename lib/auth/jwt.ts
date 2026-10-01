@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import type { StringValue } from 'ms';
 import { getAuthEnv } from './env';
@@ -24,6 +25,7 @@ export function signRefreshToken(payload: JwtPayload): string {
   const env = getAuthEnv();
   return jwt.sign(payload, env.REFRESH_TOKEN_SECRET, {
     expiresIn: env.REFRESH_TOKEN_EXPIRES_IN as StringValue,
+    jwtid: crypto.randomUUID(),
   });
 }
 
@@ -31,3 +33,4 @@ export function verifyRefreshToken(token: string): JwtPayload {
   const env = getAuthEnv();
   return jwt.verify(token, env.REFRESH_TOKEN_SECRET) as JwtPayload;
 }
+

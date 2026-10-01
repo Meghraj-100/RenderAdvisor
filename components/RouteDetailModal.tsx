@@ -231,7 +231,7 @@ function Profile() {
         {/* Footer */}
         <div className="p-4 border-t border-white/10 bg-navy-900/80 text-center">
           <p className="text-xs text-gray-500">
-            Powered by RenderAdvisor Analysis Engine • Weights derived from Hanafi et al. TEKNIKA 2024
+            Powered by RenderAdvisor Analysis Engine • Performance-Calibrated Decision Engine
           </p>
         </div>
       </div>

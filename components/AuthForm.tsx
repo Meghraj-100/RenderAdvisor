@@ -3,7 +3,7 @@
 import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Eye, EyeOff } from 'lucide-react';
 
 type Mode = 'login' | 'register';
 
@@ -17,6 +17,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -87,7 +88,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl bg-navy-950/60 border border-white/10 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500/50"
+              className="w-full rounded-xl bg-navy-950/80 bg-[#0a0f1d] border border-white/10 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50"
               placeholder="Your name"
             />
           </div>
@@ -104,7 +105,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-xl bg-navy-950/60 border border-white/10 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500/50"
+            className="w-full rounded-xl bg-navy-950/80 bg-[#0a0f1d] border border-white/10 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50"
             placeholder="you@example.com"
           />
         </div>
@@ -113,17 +114,27 @@ export default function AuthForm({ mode }: AuthFormProps) {
           <label className="block text-sm font-medium text-gray-300 mb-1.5" htmlFor="password">
             Password
           </label>
-          <input
-            id="password"
-            type="password"
-            required
-            minLength={mode === 'register' ? 8 : 1}
-            autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-xl bg-navy-950/60 border border-white/10 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500/50"
-            placeholder={mode === 'register' ? 'At least 8 characters' : 'Password'}
-          />
+          <div className="relative">
+            <input
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              required
+              minLength={mode === 'register' ? 8 : 1}
+              autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-xl bg-navy-950/80 bg-[#0a0f1d] border border-white/10 px-4 py-3 pr-11 text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50"
+              placeholder={mode === 'register' ? 'At least 8 characters' : 'Password'}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200 transition-colors p-1"
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
         </div>
 
         <button
