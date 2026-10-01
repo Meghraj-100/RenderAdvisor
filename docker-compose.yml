@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: renderadvisor
+      POSTGRES_PASSWORD: renderadvisor
+      POSTGRES_DB: renderadvisor
+    ports:
+      - '5433:5432'
+    volumes:
+      - renderadvisor_pg:/var/lib/postgresql/data
+
+volumes:
+  renderadvisor_pg:

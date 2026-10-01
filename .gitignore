@@ -1,0 +1,23 @@
+# dependencies
+node_modules
+
+# next.js
+.next
+out
+
+# production
+build
+dist
+
+# debug / local
+*.log
+.env
+.env.local
+.env*.local
+
+# office temp
+~$*
+
+# os
+.DS_Store
+Thumbs.db
