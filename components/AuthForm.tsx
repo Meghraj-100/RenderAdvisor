@@ -66,8 +66,8 @@ export default function AuthForm({ mode }: AuthFormProps) {
       </h1>
       <p className="text-sm text-gray-400 mb-8">
         {mode === 'login'
-          ? 'Use your EventHive-style account to access RenderAdvisor.'
-          : 'Register to analyze Next.js rendering strategies.'}
+          ? 'Sign in to access your RenderAdvisor dashboard.'
+          : 'Create an account to analyze Next.js rendering strategies.'}
       </p>
 
       {error && (

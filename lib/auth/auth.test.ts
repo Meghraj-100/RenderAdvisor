@@ -16,7 +16,7 @@ const TEST_EMAIL = `auth-test-${Date.now()}@renderadvisor.local`;
 const TEST_PASSWORD = 'securepassword123';
 const TEST_NAME = 'Auth Test User';
 
-describe('auth (EventHive-style JWT + refresh rotation)', () => {
+describe('auth (JWT + refresh token rotation)', () => {
   beforeAll(async () => {
     if (!process.env.DATABASE_URL) {
       throw new Error('DATABASE_URL is required to run auth tests');
