@@ -7,7 +7,17 @@ let dbInstance: ReturnType<typeof drizzle> | null = null;
 
 function getPool(): Pool {
   if (!pool) {
-    pool = new Pool({ connectionString: getAuthEnv().DATABASE_URL });
+    const databaseUrl = getAuthEnv().DATABASE_URL;
+    const isCloudOrProd =
+      databaseUrl.includes('sslmode=') ||
+      (process.env.NODE_ENV === 'production' &&
+        !databaseUrl.includes('localhost') &&
+        !databaseUrl.includes('127.0.0.1'));
+
+    pool = new Pool({
+      connectionString: databaseUrl,
+      ssl: isCloudOrProd ? { rejectUnauthorized: false } : undefined,
+    });
   }
   return pool;
 }

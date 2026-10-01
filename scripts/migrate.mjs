@@ -11,7 +11,17 @@ const connectionString =
   'postgresql://renderadvisor:renderadvisor@localhost:5433/renderadvisor';
 
 const sql = fs.readFileSync(sqlPath, 'utf8');
-const client = new pg.Client({ connectionString });
+
+const isCloudOrProd =
+  connectionString.includes('sslmode=') ||
+  (process.env.NODE_ENV === 'production' &&
+    !connectionString.includes('localhost') &&
+    !connectionString.includes('127.0.0.1'));
+
+const client = new pg.Client({
+  connectionString,
+  ssl: isCloudOrProd ? { rejectUnauthorized: false } : undefined,
+});
 
 await client.connect();
 await client.query(sql);

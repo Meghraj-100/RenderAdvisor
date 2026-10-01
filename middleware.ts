@@ -4,6 +4,9 @@ import type { NextRequest } from 'next/server';
 const publicPaths = ['/login', '/register'];
 
 function isPublicPath(pathname: string): boolean {
+  if (pathname === '/api/health' || pathname === '/health') {
+    return true;
+  }
   if (publicPaths.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
     return true;
   }

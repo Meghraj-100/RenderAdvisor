@@ -3,13 +3,37 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: renderadvisor
-      POSTGRES_PASSWORD: renderadvisor
-      POSTGRES_DB: renderadvisor
+      POSTGRES_USER: ${POSTGRES_USER:-renderadvisor}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-renderadvisor}
+      POSTGRES_DB: ${POSTGRES_DB:-renderadvisor}
     ports:
       - '5433:5432'
     volumes:
       - renderadvisor_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U renderadvisor -d renderadvisor']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://renderadvisor:renderadvisor@db:5432/renderadvisor
+      JWT_SECRET: ${JWT_SECRET:-PjEt3bdg0WDXHNaJwiyA2GIeMYzFVfLZ7U9kKhs6vu1BcrSq}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-15m}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET:-ZQtl9UaYvuGnLDqkTyEJeH4Kd2C3Bwfp06sOg7S1jbX8FxzA}
+      REFRESH_TOKEN_EXPIRES_IN: ${REFRESH_TOKEN_EXPIRES_IN:-7d}
+      RUN_MIGRATIONS: 'true'
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   renderadvisor_pg:

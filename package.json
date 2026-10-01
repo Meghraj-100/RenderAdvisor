@@ -8,6 +8,9 @@
     "start": "next start",
     "db:migrate": "node scripts/migrate.mjs",
     "db:up": "docker compose up -d db",
+    "docker:build": "docker build -t renderadvisor .",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
     "test": "vitest run",
     "test:watch": "vitest"
   },
