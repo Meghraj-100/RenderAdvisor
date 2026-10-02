@@ -40,9 +40,20 @@ export default function AuthForm({ mode }: AuthFormProps) {
         body: JSON.stringify(body),
       });
 
-      const json = await res.json();
+      const contentType = res.headers.get('content-type') || '';
+      let json: any = null;
+
+      if (contentType.includes('application/json')) {
+        json = await res.json();
+      } else {
+        if (res.status === 500 || res.status === 503) {
+          throw new Error('Server/Database error: Please ensure DATABASE_URL and environment variables are configured in Vercel.');
+        }
+        throw new Error(`Server returned unexpected error (${res.status})`);
+      }
+
       if (!res.ok) {
-        throw new Error(json.message || 'Request failed');
+        throw new Error(json?.message || 'Request failed');
       }
 
       if (mode === 'register') {

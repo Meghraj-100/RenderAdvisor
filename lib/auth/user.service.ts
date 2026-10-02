@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import ms from 'ms';
 import type { StringValue } from 'ms';
 import { getAuthEnv } from './env';
